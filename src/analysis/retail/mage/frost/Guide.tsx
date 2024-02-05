@@ -7,6 +7,8 @@ import ActiveTimeGraph from 'parser/ui/ActiveTimeGraph';
 import { SpellLink } from 'interface';
 import TALENTS from 'common/TALENTS/mage';
 import PreparationSection from 'interface/guide/components/Preparation/PreparationSection';
+import { AplSectionData } from 'interface/guide/components/Apl';
+import { apl, checkFrost } from 'analysis/retail/mage/frost/core/apl';
 
 export const GUIDE_CORE_EXPLANATION_PERCENT = 50;
 
@@ -48,6 +50,9 @@ export default function Guide({ modules, events, info }: GuideProps<typeof Comba
 
   return (
     <>
+      <Section title="Action Priority">
+        <AplSectionData checker={checkFrost} apl={apl} />
+      </Section>
       <Section title="Core">
         {modules.wintersChill.guideSubsection}
         {modules.flurry.guideSubsection}
