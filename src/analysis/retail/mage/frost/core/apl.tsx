@@ -32,7 +32,7 @@ export const apl = build([
     spell: TALENTS.ICE_LANCE_TALENT,
     condition: or(
       debuffPresent(SPELLS.WINTERS_CHILL),
-      buffPresent(TALENTS.FINGERS_OF_FROST_TALENT, 200),
+      buffPresent(SPELLS.FINGERS_OF_FROST_BUFF, 200),
     ),
   },
   SPELLS.FROSTBOLT,
