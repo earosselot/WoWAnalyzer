@@ -20,7 +20,7 @@ export const apl = build([
       or(
         lastSpellCast(TALENTS.GLACIAL_SPIKE_TALENT),
         lastSpellCast(SPELLS.FROSTBOLT),
-        buffStacks(SPELLS.ICICLES_BUFF, { atLeast: 4 }),
+        buffStacks(SPELLS.ICICLES_BUFF, { atLeast: 4, atMost: 4 }),
       ),
     ),
   },
@@ -46,7 +46,7 @@ export const checkFrost = (events: AnyEvent[], info: PlayerInfo): CheckResult =>
 /**
  * Icy Veins
  * 1. Cast Flurry have just cast FB, or GS, or you have 4 Icicles before casting it.
- * 3. Glacial Spike if you are at 5 Icicles.
- * 4. Cast Ice Lance if Winter's Chill or Fingers of Frost.
- * 6. Cast Frostbolt.
+ * 2. Glacial Spike if you are at 5 Icicles.
+ * 3. Cast Ice Lance if Winter's Chill or Fingers of Frost.
+ * 4. Cast Frostbolt.
  */
