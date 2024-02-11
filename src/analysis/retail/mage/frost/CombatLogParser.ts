@@ -26,6 +26,8 @@ import IceLance from './core/IceLance';
 import IcyVeins from './core/IcyVeins';
 import FingersOfFrost from './core/FingersOfFrost';
 import WintersChill from './core/WintersChill';
+import IciclesStackTracker from 'analysis/retail/mage/frost/core/IciclesStackTracker';
+import IciclesGraph from 'analysis/retail/mage/frost/core/IciclesGraph';
 
 //Talents
 import ColdSnap from './talents/ColdSnap';
@@ -41,11 +43,11 @@ import GlacialSpike from './talents/GlacialSpike';
 import LonelyWinter from './talents/LonelyWinter';
 import SplittingIce from './talents/SplittingIce';
 import ThermalVoid from './talents/ThermalVoid';
+import ShiftingPowerFrost from 'analysis/retail/mage/frost/talents/FrostShiftingPower';
 
 //Normalizers
 import CometStormLinkNormalizer from './normalizers/CometStormLinkNormalizer';
 import CastLinkNormalizer from './normalizers/CastLinkNormalizer';
-import ShiftingPowerFrost from 'analysis/retail/mage/frost/talents/FrostShiftingPower';
 
 class CombatLogParser extends CoreCombatLogParser {
   static specModules = {
@@ -85,6 +87,8 @@ class CombatLogParser extends CoreCombatLogParser {
     frozenOrb: FrozenOrb,
     coldSnap: ColdSnap,
     shiftingPowerFrost: ShiftingPowerFrost,
+    iciclesStackTracker: IciclesStackTracker,
+    iciclesGraph: IciclesGraph,
 
     //Talents - Shared
     elementalBarrier: ElementalBarrier,

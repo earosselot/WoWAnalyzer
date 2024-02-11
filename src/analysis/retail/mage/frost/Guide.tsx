@@ -52,6 +52,7 @@ export default function Guide({ modules, events, info }: GuideProps<typeof Comba
     <>
       <Section title="Action Priority">
         <AplSectionData checker={checkFrost} apl={apl} />
+        {modules.iciclesGraph.plot}
       </Section>
       <Section title="Core">
         {modules.wintersChill.guideSubsection}
