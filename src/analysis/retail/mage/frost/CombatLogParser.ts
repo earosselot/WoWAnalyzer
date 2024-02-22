@@ -43,11 +43,12 @@ import GlacialSpike from './talents/GlacialSpike';
 import LonelyWinter from './talents/LonelyWinter';
 import SplittingIce from './talents/SplittingIce';
 import ThermalVoid from './talents/ThermalVoid';
-import ShiftingPowerFrost from 'analysis/retail/mage/frost/talents/FrostShiftingPower';
+import ShiftingPowerFrost from 'analysis/retail/mage/frost/talents/ShiftingPowerFrost';
 
 //Normalizers
 import CometStormLinkNormalizer from './normalizers/CometStormLinkNormalizer';
 import CastLinkNormalizer from './normalizers/CastLinkNormalizer';
+import FrostEventOrderNormalizer from 'analysis/retail/mage/frost/normalizers/EventOrderNormalizer';
 
 class CombatLogParser extends CoreCombatLogParser {
   static specModules = {
@@ -57,6 +58,7 @@ class CombatLogParser extends CoreCombatLogParser {
     //Normalizers
     cometStormLinkNormalizer: CometStormLinkNormalizer,
     castLinkNormalizer: CastLinkNormalizer,
+    frostEventOrderNormalizer: FrostEventOrderNormalizer,
 
     //Core
     abilities: Abilities,
