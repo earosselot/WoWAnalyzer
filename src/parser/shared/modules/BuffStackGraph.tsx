@@ -38,6 +38,11 @@ export default abstract class BuffStackGraph extends Analyzer {
           calculate: `datum.timestamp - ${this.owner.fight.start_time}`,
           as: 'timestamp_shifted',
         },
+        {
+          // Tooltips cant have calculated fields, so we need to calculate this here.
+          calculate: formatTime('datum.timestamp_shifted'),
+          as: 'timestamp_humanized',
+        },
       ],
       encoding: {
         x: {
@@ -58,6 +63,62 @@ export default abstract class BuffStackGraph extends Analyzer {
           type: 'quantitative' as const,
         },
       },
+      layer: [
+        {
+          layer: [
+            {
+              mark: {
+                type: 'line' as const,
+                color: 'blue',
+                interpolate: 'step-after' as const,
+              },
+            },
+            {
+              transform: [
+                {
+                  filter: {
+                    param: 'hover',
+                    empty: false,
+                  },
+                },
+              ],
+              mark: 'point',
+            },
+          ],
+        },
+        {
+          mark: {
+            type: 'rule',
+            color: 'white',
+          },
+          encoding: {
+            opacity: {
+              condition: {
+                value: 0.3,
+                param: 'hover',
+                empty: false,
+              },
+              value: 0,
+            },
+            tooltip: [
+              { field: 'timestamp_humanized', type: 'nominal', title: 'Time' },
+              { field: 'amount', type: 'quantitative', title: 'stacks' },
+            ],
+          },
+          params: [
+            {
+              name: 'hover',
+              select: {
+                type: 'point',
+                fields: ['timestamp_shifted'],
+                nearest: true,
+                on: 'mouseover',
+                clear: 'mouseout',
+              },
+            },
+          ],
+        },
+      ],
       resolve: {
         scale: { y: 'independent' as const },
       },
@@ -67,6 +128,7 @@ export default abstract class BuffStackGraph extends Analyzer {
       config: {
         view: {},
       },
+      //todo: agregar aca de ResourceGraph para agregar la linea horizontal que muestra los valores por tiempo
     };
 
     // TODO make fixed 100% = 2 minutes, allow horizontal scroll
