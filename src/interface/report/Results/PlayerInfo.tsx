@@ -54,7 +54,7 @@ const PlayerInfo = ({ combatant }: Props) => {
       <div className="player-details">
         {isRetail && (
           <>
-            <PlayerInfoTalents talents={talents} />
+            <PlayerInfoTalents talents={talents} specId={combatant.specId} />
           </>
         )}
       </div>
