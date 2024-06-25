@@ -20,22 +20,22 @@ export function TalentTree(props: { nodes: any; talents: any; subTreeNodes?: any
   const nodesPosXmin = nodes.reduce(
     (acc: any, curr: any) => (curr.posX < acc.posX ? curr : acc),
     nodes[0] || undefined,
-  ).posX;
+  )?.posX;
   const nodesPosXmax = nodes.reduce(
     (acc: any, curr: any) => (curr.posX > acc.posX ? curr : acc),
     nodes[0] || undefined,
-  ).posX;
+  )?.posX;
   const posXCorrection = nodesPosXmin - 600;
   const specTalentGridWidth = nodesPosXmax - nodesPosXmin + 1200;
 
   const nodesPosYmin = nodes.reduce(
     (acc: any, curr: any) => (curr.posY < acc.posY ? curr : acc),
     nodes[0] || undefined,
-  ).posY;
+  )?.posY;
   const nodesPosYmax = nodes.reduce(
     (acc: any, curr: any) => (curr.posY > acc.posY ? curr : acc),
     nodes[0] || undefined,
-  ).posY;
+  )?.posY;
   const posYCorrection = subTreeNodes ? nodesPosYmin - 600 : nodesPosYmin - 600; // todo: review this
   const specTalentGridHeight = subTreeNodes
     ? nodesPosYmax - nodesPosYmin + 1200
@@ -56,7 +56,9 @@ export function TalentTree(props: { nodes: any; talents: any; subTreeNodes?: any
     node.rightPx = talentUnitsToPixel(node.posX - posXCorrection) - iconSizePx / 2;
     node.iconPx = iconSizePx;
     node.active = node.entries?.some((entry: any) => hasTalent(entry));
-    node.activeEntryId = node.entries?.find((entry: any) => hasTalent(entry))?.id;
+    node.activeEntry = node.entries?.find((entry: any) => hasTalent(entry));
+    node.activeEntrySpellId = node.activeEntry?.spellId;
+    node.activeEntryId = node.activeEntry?.id;
     node.activeRank = talents.find((talent: any) => talent.id === node.activeEntryId)?.rank || 0;
   });
 

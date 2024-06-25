@@ -36,7 +36,7 @@ export function PlayerInfoTalentTreeContainer(props: {
   };
 
   // next line to filter hero nodes. Should look for where we can get talentTreeId from.
-  const filteredHeroNodes = heroNodes.filter((node: any) => node.subTreeId === 40);
+  const filteredHeroNodes = heroNodes?.filter((node: any) => node.subTreeId === 40);
 
   const height = normalizedHeight();
 

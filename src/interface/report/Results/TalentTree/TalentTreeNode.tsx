@@ -1,6 +1,8 @@
-import { SpellIcon } from 'interface';
 import { TalentTreeRank } from 'interface/report/Results/TalentTree/TalentTreeRank';
 import { TalentTreeNodePositioner } from 'interface/report/Results/TalentTree/TalentTreeNodePositioner';
+import { SingleNode } from 'interface/report/Results/TalentTree/SingleNode';
+import { ChoiceNode } from 'interface/report/Results/TalentTree/ChoiceNode';
+import { ChoiceArrows } from 'interface/report/Results/TalentTree/ChoiceArrows';
 
 export function TalentTreeNode(props: { node: any }) {
   const { node } = props;
@@ -8,8 +10,6 @@ export function TalentTreeNode(props: { node: any }) {
   const getBorderRadius = (entry: any) => {
     return entry.type === 'active' ? '0' : node.iconPx / 2;
   };
-
-  // const activeEntry = node.entries.find((entry: any) => entry.id === node.activeEntryId);
 
   return (
     <TalentTreeNodePositioner key={node.id} node={node}>
@@ -25,31 +25,17 @@ export function TalentTreeNode(props: { node: any }) {
           width: node.iconPx,
           height: node.iconPx,
           borderRadius: getBorderRadius(node.entries[0]),
+          filter: node.active ? 'grayscale(0)' : 'grayscale(1)',
         }}
       >
-        <div style={{ boxSizing: 'border-box', width: node.iconPx - 2, height: node.iconPx - 2 }}>
-          <div
-            style={{
-              position: 'relative',
-              boxSizing: 'border-box',
-              width: node.iconPx - 2,
-              height: node.iconPx - 2,
-              lineHeight: '3',
-            }}
-          >
-            <SpellIcon
-              spell={node.entries[0].spellId}
-              style={{
-                width: node.iconPx - 2,
-                height: node.iconPx - 2,
-                top: '5',
-              }}
-            />
-          </div>
-        </div>
+        {node.type === 'choice' ? (
+          <ChoiceNode node={node} key={node.id} />
+        ) : (
+          <SingleNode node={node} key={node.id} />
+        )}
       </div>
-
       <TalentTreeRank activeRank={node.activeRank} maxRanks={node.maxRanks} />
+      <ChoiceArrows nodeType={node.type} active={node.active} />
     </TalentTreeNodePositioner>
   );
 }

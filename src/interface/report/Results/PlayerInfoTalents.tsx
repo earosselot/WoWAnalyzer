@@ -1,7 +1,7 @@
 import { Trans } from '@lingui/macro';
 import { TalentEntry } from 'parser/core/Events';
 // import PlayerInfoTalent from 'interface/report/Results/PlayerInfoTalent';
-import talentTrees from '../../../../public/specs-tww.json';
+import talentTrees from '../../../../public/specs.json';
 import { PlayerInfoTalentTreeContainer } from 'interface/report/Results/TalentTree/PlayerInfoTalentTreeContainer';
 
 interface Props {

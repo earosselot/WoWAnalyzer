@@ -14,7 +14,6 @@ export function TalentTreeNodePositioner(props: PropsWithChildren<propsType>) {
     left: node.rightPx,
     width: node.iconPx,
     height: node.iconPx,
-    filter: node.active ? 'grayscale(0)' : 'grayscale(1)',
   };
 
   const containterStyle: any = {
