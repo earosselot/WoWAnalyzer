@@ -1,4 +1,6 @@
-import { TalentTree } from 'interface/report/Results/TalentTree/TalentTree';
+import { TalentTreeSection } from 'interface/report/Results/TalentTree/TalentTreeSection';
+import { TalentEntry } from 'parser/core/Events';
+import { TalentTree } from 'interface/report/Results/TalentTree/TalentTreesSuplier';
 
 /**
  * WoW Talent Grid (In talent units)
@@ -8,7 +10,6 @@ import { TalentTree } from 'interface/report/Results/TalentTree/TalentTree';
  * distance between rows/columns = 600 tu
  */
 
-const convertionFactor = 600 / 5400; // 600px / 5400tu
 const wowTalentGridHeight = 7400;
 const componentStyle = {
   display: 'flex',
@@ -17,15 +18,16 @@ const componentStyle = {
 };
 
 export function PlayerInfoTalentTreeContainer(props: {
-  combatantTalentTree: any | undefined;
-  talents: any;
+  combatantTalentTree: TalentTree | null;
+  talents: TalentEntry[];
 }) {
   const width = 1300;
+  const convertionFactor = ((width / 8) * 3) / 5400; // 600px / 5400tu
 
-  const classNodes = props.combatantTalentTree.classNodes;
-  const specNodes = props.combatantTalentTree.specNodes;
-  const heroNodes = props.combatantTalentTree.heroNodes;
-  const subtreeNodes = props.combatantTalentTree.subTreeNodes;
+  const classNodes = props.combatantTalentTree?.classNodes;
+  const specNodes = props.combatantTalentTree?.specNodes;
+  const heroNodes = props.combatantTalentTree?.heroNodes;
+  const subtreeNodes = props.combatantTalentTree?.subTreeNodes;
 
   const normalizedHeight = (): number => {
     return normalizeTalentUnits(wowTalentGridHeight);
@@ -35,8 +37,9 @@ export function PlayerInfoTalentTreeContainer(props: {
     return pos * convertionFactor;
   };
 
-  // next line to filter hero nodes. Should look for where we can get talentTreeId from.
-  const filteredHeroNodes = heroNodes?.filter((node: any) => node.subTreeId === 40);
+  // Next line to filter hero nodes used by the player. Should replace '40' for the character subTreeId.
+  let filteredHeroNodes = heroNodes?.filter((node: any) => node.subTreeId === 40);
+  filteredHeroNodes = filteredHeroNodes ? filteredHeroNodes : [];
 
   const height = normalizedHeight();
 
@@ -49,16 +52,16 @@ export function PlayerInfoTalentTreeContainer(props: {
         height: height,
       }}
     >
-      <TalentTree nodes={classNodes} talents={props.talents} width={width} />
-      {!filteredHeroNodes.empty && (
-        <TalentTree
+      <TalentTreeSection nodes={classNodes} talents={props.talents} width={width} />
+      {filteredHeroNodes.length > 0 && (
+        <TalentTreeSection
           nodes={filteredHeroNodes}
           talents={props.talents}
           subTreeNodes={subtreeNodes}
           width={width}
         />
       )}
-      <TalentTree nodes={specNodes} talents={props.talents} width={width} />
+      <TalentTreeSection nodes={specNodes} talents={props.talents} width={width} />
     </div>
   );
 }

@@ -1,8 +1,7 @@
 import { Trans } from '@lingui/macro';
 import { TalentEntry } from 'parser/core/Events';
-// import PlayerInfoTalent from 'interface/report/Results/PlayerInfoTalent';
-import talentTrees from '../../../../public/specs.json';
 import { PlayerInfoTalentTreeContainer } from 'interface/report/Results/TalentTree/PlayerInfoTalentTreeContainer';
+import { getTalentTree, TalentTree } from 'interface/report/Results/TalentTree/TalentTreesSuplier';
 
 interface Props {
   talents: TalentEntry[];
@@ -26,7 +25,7 @@ const PlayerInfoTalents = ({ talents, specId }: Props) => {
     );
   }
 
-  const combatantTalentTree = talentTrees.find((talentTree) => talentTree.specId === specId);
+  const combatantTalentTree: TalentTree | null = getTalentTree(specId);
 
   return (
     <div className="player-details-talents">
@@ -34,11 +33,6 @@ const PlayerInfoTalents = ({ talents, specId }: Props) => {
         <Trans id="common.talents">Talents</Trans>
       </h3>
       <PlayerInfoTalentTreeContainer talents={talents} combatantTalentTree={combatantTalentTree} />
-      {/*<div className="talent-info">*/}
-      {/*  {talents.map((talent) => (*/}
-      {/*    <PlayerInfoTalent key={talent.id} talentEntry={talent} />*/}
-      {/*  ))}*/}
-      {/*</div>*/}
     </div>
   );
 };

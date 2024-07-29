@@ -1,4 +1,5 @@
 import { TalentTreeNode } from 'interface/report/Results/TalentTree/TalentTreeNode';
+import { TalentNode } from 'scripts/talents/talent-tree-types';
 
 /**
  * WoW Talent Grid (In talent units)
@@ -8,13 +9,18 @@ import { TalentTreeNode } from 'interface/report/Results/TalentTree/TalentTreeNo
  * distance between rows/columns = 600 tu
  */
 
+interface Props {
+  nodes: TalentNode[];
+  talents: any;
+  subTreeNodes?: any;
+  width: number;
+}
+
 // const convertionFactor = 600 / 5400; // 600px / 5400tu
 // const talentGridHeight = 7400;
 const wowTalentIconSize = 415;
 
-export function TalentTree(props: { nodes: any; talents: any; subTreeNodes?: any; width: number }) {
-  const { nodes, talents, subTreeNodes, width } = props;
-
+export function TalentTreeSection({ nodes, talents, subTreeNodes, width }: Props) {
   const convertionFactor = ((width / 8) * 3) / 5400; // 600px / 5400tu
 
   const nodesPosXmin = nodes.reduce(
@@ -51,7 +57,7 @@ export function TalentTree(props: { nodes: any; talents: any; subTreeNodes?: any
 
   const iconSizePx = talentUnitsToPixel(wowTalentIconSize);
 
-  props.nodes.forEach((node: any) => {
+  nodes.forEach((node: any) => {
     node.topPx = talentUnitsToPixel(node.posY - posYCorrection) - iconSizePx / 2;
     node.rightPx = talentUnitsToPixel(node.posX - posXCorrection) - iconSizePx / 2;
     node.iconPx = iconSizePx;
@@ -62,7 +68,7 @@ export function TalentTree(props: { nodes: any; talents: any; subTreeNodes?: any
     node.activeRank = talents.find((talent: any) => talent.id === node.activeEntryId)?.rank || 0;
   });
 
-  const nodePaths = props.nodes.flatMap((node: any) => {
+  const nodePaths = nodes.flatMap((node: any) => {
     return node.next.map((nextNodeId: any) => {
       const nextNode = nodes.find((nextNode: any) => nextNode.id === nextNodeId);
       return {
@@ -94,7 +100,7 @@ export function TalentTree(props: { nodes: any; talents: any; subTreeNodes?: any
   return (
     <div style={containerStyle}>
       {subTreeNodes && subTreeNodes.entries[0]}
-      {props.nodes.map((node: any) => (
+      {nodes.map((node: any) => (
         <TalentTreeNode key={node.id} node={node} />
       ))}
       <svg style={svgContainerStyle}>
