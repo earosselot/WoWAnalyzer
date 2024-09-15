@@ -12,6 +12,8 @@ import PreparationSection from 'interface/guide/components/Preparation/Preparati
 import ManaLevelGraph from './ManaChart/TabComponent/ManaLevelGraph';
 import { GapHighlight } from 'parser/ui/CooldownBar';
 import CastEfficiencyBar from 'parser/ui/CastEfficiencyBar';
+import { AplSectionData } from 'interface/guide/components/Apl';
+import * as sfApl from 'analysis/retail/mage/arcane/apl/SunfuryAplCheck';
 
 export const GUIDE_CORE_EXPLANATION_PERCENT = 50;
 
@@ -102,6 +104,11 @@ export default function Guide({ modules, events, info }: GuideProps<typeof Comba
         </>
       </Section>
       <Section title="Core">
+        <SubSection title="Action Priority List (APL)">
+          {info.combatant.hasTalent(TALENTS.MEMORY_OF_ALAR_TALENT) && (
+            <AplSectionData checker={sfApl.sunfuryAplCheck} apl={sfApl.sunfuryApl} />
+          )}
+        </SubSection>
         {alwaysBeCastingSubsection}
         {manaLevelSubsection}
       </Section>
