@@ -73,6 +73,8 @@ class Abilities extends CoreAbilities {
         category: SPELL_CATEGORY.ROTATIONAL,
         cooldown: 30,
         enabled: combatant.hasTalent(talents.CHI_BURST_SHARED_TALENT),
+        damageSpellIds: [SPELLS.CHI_BURST_TALENT_DAMAGE.id],
+        healSpellIds: [SPELLS.CHI_BURST_HEAL.id],
         castEfficiency: {
           suggestion: false,
         },
@@ -111,7 +113,7 @@ class Abilities extends CoreAbilities {
         spell: talents.INVOKE_NIUZAO_THE_BLACK_OX_TALENT.id,
         enabled: combatant.hasTalent(talents.INVOKE_NIUZAO_THE_BLACK_OX_TALENT),
         category: SPELL_CATEGORY.COOLDOWNS,
-        cooldown: 180,
+        cooldown: 180 - combatant.getTalentRank(talents.WALK_WITH_THE_OX_TALENT) * 30,
         gcd: {
           base: 1000,
         },
@@ -147,6 +149,21 @@ class Abilities extends CoreAbilities {
         category: SPELL_CATEGORY.DEFENSIVE,
         cooldown: 45 * (combatant.hasTalent(talents.LIGHT_BREWING_TALENT) ? 0.8 : 1),
         enabled: combatant.hasTalent(talents.CELESTIAL_BREW_TALENT),
+        charges: 1 + Number(combatant.hasTalent(talents.ENDLESS_DRAUGHT_TALENT)),
+        gcd: {
+          // yes, hasted
+          base: 1000,
+        },
+        castEfficiency: {
+          suggestion: true,
+          recommendedEfficiency: 0.7,
+        },
+      },
+      {
+        spell: talents.CELESTIAL_INFUSION_TALENT.id,
+        category: SPELL_CATEGORY.DEFENSIVE,
+        cooldown: 45 * (combatant.hasTalent(talents.LIGHT_BREWING_TALENT) ? 0.8 : 1),
+        enabled: combatant.hasTalent(talents.CELESTIAL_INFUSION_TALENT),
         charges: 1 + Number(combatant.hasTalent(talents.ENDLESS_DRAUGHT_TALENT)),
         gcd: {
           // yes, hasted
