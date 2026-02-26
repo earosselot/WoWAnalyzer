@@ -268,21 +268,6 @@ class Abilities extends CoreAbilities {
         },
       },
       {
-        spell: TALENTS.ALTER_TIME_TALENT.id,
-        buffSpellId: SPELLS.ALTER_TIME_BUFF.id,
-        category: SPELL_CATEGORY.UTILITY,
-        enabled: combatant.hasTalent(TALENTS.ALTER_TIME_TALENT),
-        cooldown: 60 - combatant.getTalentRank(TALENTS.ALTER_TIME_TALENT) * 10,
-        gcd: null,
-      },
-      {
-        spell: SPELLS.ALTER_TIME_RETURN.id,
-        category: SPELL_CATEGORY.UTILITY,
-        enabled: combatant.hasTalent(TALENTS.ALTER_TIME_TALENT),
-        cooldown: 0,
-        gcd: null,
-      },
-      {
         spell: SPELLS.INVISIBILITY.id,
         buffSpellId: SPELLS.INVISIBILITY_BUFF.id,
         category: SPELL_CATEGORY.UTILITY,

@@ -53,6 +53,7 @@ export default function Guide({ modules, events, info }: GuideProps<typeof Comba
       <Section title="Core">
         <HideExplanationsToggle id="hide-explanations-core" />
         {alwaysBeCastingSubsection}
+        {modules.freezing.guideSubsection}
         {modules.flurry.guideSubsection}
       </Section>
       <Section title="Procs">

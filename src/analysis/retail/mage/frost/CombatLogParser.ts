@@ -20,6 +20,7 @@ import Buffs from './core/Buffs';
 import CooldownThroughputTracker from './core/CooldownThroughputTracker';
 import IceLance from './core/IceLance';
 import FingersOfFrost from './core/FingersOfFrost';
+import Freezing from './core/Freezing';
 
 //Talents
 import ColdSnap from './talents/ColdSnap';
@@ -33,6 +34,7 @@ import SpellfrostTeachings from 'analysis/retail/mage/frost/talents/SpellfrostTe
 //Normalizers
 import CometStormLinkNormalizer from './normalizers/CometStormLinkNormalizer';
 import CastLinkNormalizer from './normalizers/CastLinkNormalizer';
+import FreezingNormalizer from './normalizers/FreezingNormalizer';
 
 class CombatLogParser extends CoreCombatLogParser {
   static specModules = {
@@ -41,6 +43,7 @@ class CombatLogParser extends CoreCombatLogParser {
     //Normalizers
     cometStormLinkNormalizer: CometStormLinkNormalizer,
     castLinkNormalizer: CastLinkNormalizer,
+    freezingNormalizer: FreezingNormalizer,
 
     //Core
     abilities: Abilities,
@@ -52,6 +55,7 @@ class CombatLogParser extends CoreCombatLogParser {
     iceLance: IceLance,
     arcaneIntellect: ArcaneIntellect,
     fingersOfFrost: FingersOfFrost,
+    freezing: Freezing,
 
     // Talents - Frost
     waterElemental: WaterElemental,

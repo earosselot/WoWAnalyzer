@@ -5,6 +5,7 @@
  */
 
 import Spell from 'common/SPELLS/Spell';
+import { name } from 'wow-dbc/dist/src/hydraters';
 
 const spells = {
   MASTERY_ICICLES: {
@@ -62,9 +63,19 @@ const spells = {
     name: "Winter's Chill",
     icon: 'spell_frost_frostward',
   },
+  GLACIAL_SPIKE: {
+    id: 199786,
+    name: 'Glacial Spike',
+    icon: 'ability_mage_glacialspike',
+  },
   GLACIAL_SPIKE_BUFF: {
     id: 199844,
     name: 'Glacial Spike!',
+    icon: 'ability_mage_glacialspike',
+  },
+  GLACIAL_SPIKE_DAMAGE: {
+    id: 228600,
+    name: 'Glacial Spike',
     icon: 'ability_mage_glacialspike',
   },
   BLIZZARD_DAMAGE: {
@@ -91,11 +102,6 @@ const spells = {
     id: 153596,
     name: 'Comet Storm',
     icon: 'spell_mage_cometstorm',
-  },
-  GLACIAL_SPIKE_DAMAGE: {
-    id: 228600,
-    name: 'Glacial Spike',
-    icon: 'ability_mage_glacialspike',
   },
   RING_OF_FROST_DAMAGE: {
     id: 82691,
@@ -146,6 +152,16 @@ const spells = {
     id: 1221389,
     name: 'Freezing',
     icon: 'inv12_ability_mage_freezing',
+  },
+  FROST_SPLINTER_DAMAGE: {
+    id: 443722,
+    name: 'Frost Splinter',
+    icon: 'inv_ability_spellslingermage_splintersblue',
+  },
+  GLACIAL_ASSAULT_DAMAGE: {
+    id: 379029,
+    name: 'Glacial Assault',
+    icon: 'inv_staff_15',
   },
 } satisfies Record<string, Spell>;
 

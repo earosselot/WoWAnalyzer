@@ -41,6 +41,11 @@ class Buffs extends CoreAuras {
         spellId: Object.keys(BLOODLUST_BUFFS).map((item) => Number(item)),
         timelineHighlight: true,
       },
+      {
+        spellId: SPELLS.FREEZING.id,
+        enabled: true,
+        timelineHighlight: true,
+      },
     ];
   }
 }
